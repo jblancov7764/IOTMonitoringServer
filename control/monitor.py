@@ -47,6 +47,8 @@ def analyze_data():
 
         current_value = item["check_value"]
 
+        print('variable: ', variable)
+
         if variable == 'luminosidad':
             if current_value > min_value and current_value < max_value:
                 alert = True

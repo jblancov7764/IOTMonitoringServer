@@ -17,7 +17,7 @@
 // Duración aproximada en la pantalla de las alertas que se reciban
 #define ALERT_DURATION 60
 // Pin del led
-int LED = 3;
+int LED = 13;
  
 
 // Declaraciones
@@ -42,7 +42,7 @@ const char pass[] = "Ghosts315"; // TODO cambiar por la contraseña de la red Wi
 
 //Conexión a Mosquitto
 #define USER "ironman" // TODO Reemplace UsuarioMQTT por un usuario (no administrador) que haya creado en la configuración del bróker de MQTT.
-const char MQTT_HOST[] = "ec2-3-84-190-16.compute-1.amazonaws.com"; // TODO Reemplace ip.maquina.mqtt por la IP del bróker MQTT que usted desplegó. Ej: 192.168.0.1
+const char MQTT_HOST[] = "ec2-100-26-203-11.compute-1.amazonaws.com"; // TODO Reemplace ip.maquina.mqtt por la IP del bróker MQTT que usted desplegó. Ej: 192.168.0.1
 const int MQTT_PORT = 8082;
 const char MQTT_USER[] = USER;
 //Contraseña de MQTT
@@ -472,7 +472,9 @@ void setup() {
 
   setTime();
 
-  configureMQTT(); 
+  configureMQTT();
+
+  digitalWrite(LED, LOW);
 }
 
 void loop() {
