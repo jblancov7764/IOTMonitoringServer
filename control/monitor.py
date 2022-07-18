@@ -45,7 +45,12 @@ def analyze_data():
         city = item['station__location__city__name']
         user = item['station__user__username']
 
-        if item["check_value"] > max_value or item["check_value"] < min_value:
+        current_value = item["check_value"]
+
+        if variable == 'luminosidad':
+            if current_value > min_value and current_value < max_value:
+                alert = True
+        elif current_value > max_value or current_value < min_value:
             alert = True
 
         if alert:
