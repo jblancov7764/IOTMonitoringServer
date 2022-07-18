@@ -50,9 +50,8 @@ def analyze_data():
 
         print('variable: ', variable)
 
-        if variable == 'luminosidad':
-            if current_value > min_value and current_value < max_value:
-                alert = True
+        if current_value > min_value and current_value < max_value:
+            alert = True
         elif current_value > max_value or current_value < min_value:
             alert = True
 
