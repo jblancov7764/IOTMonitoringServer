@@ -17,7 +17,7 @@
 // Duración aproximada en la pantalla de las alertas que se reciban
 #define ALERT_DURATION 60
 // Pin del led
-int LED = 13;
+#define LED D3
  
 
 // Declaraciones
@@ -41,12 +41,12 @@ const char ssid[] = "JOANMA"; // TODO cambiar por el nombre de la red WiFi
 const char pass[] = "Ghosts315"; // TODO cambiar por la contraseña de la red WiFi
 
 //Conexión a Mosquitto
-#define USER "luva1965" // TODO Reemplace UsuarioMQTT por un usuario (no administrador) que haya creado en la configuración del bróker de MQTT.
-const char MQTT_HOST[] = "ec2-100-26-203-11.compute-1.amazonaws.com"; // TODO Reemplace ip.maquina.mqtt por la IP del bróker MQTT que usted desplegó. Ej: 192.168.0.1
+#define USER "ironman" // TODO Reemplace UsuarioMQTT por un usuario (no administrador) que haya creado en la configuración del bróker de MQTT.
+const char MQTT_HOST[] = "ec2-35-173-221-158.compute-1.amazonaws.com"; // TODO Reemplace ip.maquina.mqtt por la IP del bróker MQTT que usted desplegó. Ej: 192.168.0.1
 const int MQTT_PORT = 8082;
 const char MQTT_USER[] = USER;
 //Contraseña de MQTT
-const char MQTT_PASS[] = "Ghosts315"; // TODO Reemplace ContrasenaMQTT por la contraseña correpondiente al usuario especificado.
+const char MQTT_PASS[] = "jarvis123"; // TODO Reemplace ContrasenaMQTT por la contraseña correpondiente al usuario especificado.
 
 //Tópico al que se recibirán los datos
 // El tópico de publicación debe tener estructura: <país>/<estado>/<ciudad>/<usuario>/out
@@ -114,7 +114,7 @@ void mqtt_connect()
 void sendSensorData(float temperatura, float humedad, float luminosidad) {
   String data = "{";
   data += "\"temperatura\": "+ String(temperatura, 1) +", ";
-  data += "\"humedad\": "+ String(humedad, 1);
+  data += "\"humedad\": "+ String(humedad, 1) +", ";
   data += "\"luminosidad\": "+ String(luminosidad, 1);
   data += "}";
   char payload[data.length()+1];
@@ -460,6 +460,9 @@ void measure() {
 void setup() {
   Serial.begin(115200);
 
+  pinMode(LED, OUTPUT);
+  digitalWrite(LED, LOW);
+
   listWiFiNetworks();
 
   startDisplay();
@@ -473,8 +476,6 @@ void setup() {
   setTime();
 
   configureMQTT();
-
-  digitalWrite(LED, LOW);
 }
 
 void loop() {
